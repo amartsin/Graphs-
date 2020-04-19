@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+bool vis[1000000];
+int n;
+unordered_map<int,int> k;
+int count1 =0;
+vector<int>adj[100000];
+void dfs(int node){
+        vis [node] = true;
+         k[node]= count1;
+       // cout<< node<< " ";
+        for(auto it: adj[node] ){
+            if(!vis[it]){
+                count1++;
+                dfs(it);
+                 count1--;
+            }
+           
+        }
+}    
+int main() {
+	int n,m,u,v;
+	cin>>n;
+   m=n-1;
+    for(int i =0;i<m;i++){
+        cin>>u>>v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+    dfs(1);
+  for(auto& it2:k) {
+        cout<< it2.first << " "<< it2.second; 
+        cout<<endl;
+    }
+    
+    
+   
+ /*
+	queue<int>q;
+	q.push(3);
+	bool vis[n+1]= { false };
+	while(!q.empty()){
+	    int node = q.front();
+	    q.pop();
+	    cout<<node<<" ";
+	 	    for(auto it: adj[node]){
+	        if(!vis[it]){
+	            vis[it]= true;
+	            q.push(it);
+	        }
+	    }
+	    	}
+	    	*/
+	
+	return 0;
+}
